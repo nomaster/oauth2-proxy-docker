@@ -7,7 +7,7 @@ FROM alpine as certs
 RUN apk add --update ca-certificates
 
 FROM scratch
-CMD ["/go/bin/oauth2_proxy"]
+CMD ["/go/bin/oauth2_proxy", "-config=/etc/oauth2_proxy.cfg"]
 EXPOSE 80
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /go/bin/oauth2_proxy /go/bin/
